@@ -132,6 +132,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ExpressionDetector.cpp" />
+    <ClCompile Include="FaceDetection.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="FaceDetection.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
