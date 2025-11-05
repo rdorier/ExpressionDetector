@@ -3,7 +3,7 @@
 using namespace std;
 using namespace cv;
 
-FaceDetection::FaceDetection() : m_drawColor(255, 0, 0)
+FaceDetection::FaceDetection() : m_drawColor(255, 255, 255), m_faceCascadeDetector("data/haarcascades/haarcascade_frontalface_alt.xml")
 {
 	// Open the default camera (device ID 0)
 	int deviceID = 0;
@@ -27,9 +27,6 @@ void FaceDetection::faceDetectionLoop()
 	// store ASCII code of key pressed by user
 	int keyPressed = -1;
 
-	// build cascade classifier to detect faces using OpenCV provided xml data
-	CascadeClassifier faceCascadeDetector("data/haarcascades/haarcascade_frontalface_alt.xml");
-
 
 	// capture loop
 	while (true) {
@@ -40,18 +37,17 @@ void FaceDetection::faceDetectionLoop()
 			break;
 		}
 
-		// convert frame to grayscale for better result in face detection
-		Mat grayscaleFrame(frame);
-		cvtColor(frame, grayscaleFrame, COLOR_BGR2GRAY);
-
-		// use cascade classifier to detect face
-		vector<Rect> faceObjects;
-		vector<Rect>::iterator faceIt;
-		faceCascadeDetector.detectMultiScale(grayscaleFrame, faceObjects);
-
-		// draw rectangle to show faces detected
-		for (faceIt = faceObjects.begin(); faceIt != faceObjects.end(); ++faceIt) {
-			rectangle(frame, *faceIt, m_drawColor);
+		try {
+			// use cascade classifier to detect face
+			vector<Rect> faceObjects = detectFaces(frame);
+			// draw rectangle to show faces detected
+			vector<Rect>::iterator faceIt;
+			for (faceIt = faceObjects.begin(); faceIt != faceObjects.end(); ++faceIt) {
+				rectangle(frame, *faceIt, m_drawColor);
+			}
+		}
+		catch (Exception const& e) {
+			cerr << "ERREUR : " << e.what() << endl;
 		}
 
 		// display frame
@@ -63,4 +59,24 @@ void FaceDetection::faceDetectionLoop()
 			break;
 		}
 	}
+}
+
+std::vector<cv::Rect> FaceDetection::detectFaces(Mat const& image)
+{
+	// vector storing all area where faces are detected
+	vector<Rect> faceObjects;
+	if (image.empty())
+	{
+		throw invalid_argument("Empty image given !");
+	}
+	else {
+		// convert frame to grayscale for better result in face detection
+		Mat grayscaleFrame(image);
+		cvtColor(image, grayscaleFrame, COLOR_BGR2GRAY);
+
+		// use cascade classifier to detect face
+		m_faceCascadeDetector.detectMultiScale(grayscaleFrame, faceObjects);
+	}
+
+	return faceObjects;
 }
