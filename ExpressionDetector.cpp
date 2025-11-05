@@ -19,9 +19,11 @@ int main() {
 	int apiID = cv::CAP_ANY; // Auto-detect the backend API
 	capture.open(deviceID, apiID);
 
+	// store ASCII code of key pressed by user
 	int keyPressed = -1;
 
-	CascadeClassifier faceCascadeDetector("data/haarcascades/haarcascade_frontalface_default.xml");
+	// build cascade classifier to detect faces using OpenCV provided xml data
+	CascadeClassifier faceCascadeDetector("data/haarcascades/haarcascade_frontalface_alt.xml");
 	
 
 	// capture loop
