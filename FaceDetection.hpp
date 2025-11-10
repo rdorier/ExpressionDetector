@@ -9,15 +9,16 @@
 
 class FaceDetection
 {
-	public:
-		FaceDetection();
-		~FaceDetection();
+public:
+	FaceDetection();
+	~FaceDetection();
 
-		void faceDetectionLoop();
-		std::vector<cv::Rect> detectFaces(cv::Mat const& image);
-	private:
-		const cv::Scalar m_drawColor;
-		cv::VideoCapture m_capture;
-		cv::CascadeClassifier m_faceCascadeDetector;
+	void faceDetectionLoop();
+	std::vector<cv::Rect> detectFaces(cv::Mat const& image);
+	cv::Mat getCurrentFrame();
+private:
+	const cv::Scalar m_drawColor;
+	cv::VideoCapture m_capture;
+	cv::CascadeClassifier m_faceCascadeDetector;
 };
 
