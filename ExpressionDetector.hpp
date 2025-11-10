@@ -40,6 +40,7 @@ private:
     QWidget* m_mainWidget;
     QLabel* m_frameViewer;
 
+    // radio buttons to set one of the three modes of the application
     QRadioButton* m_noDetectionOptionBtn;
     QRadioButton* m_faceDetectionOptionBtn;
     QRadioButton* m_expDetectionOptionBtn;
