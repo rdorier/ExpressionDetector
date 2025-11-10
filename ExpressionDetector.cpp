@@ -45,6 +45,25 @@ void ExpressionDetector::updateFrame()
 {
     cv::Mat capture = m_faceDetect.getCurrentFrame();
     QImage frame = ImageManager::convertOpencvImageToQImage(capture);
+
+    DetectorMode mode = DetectorMode::FaceDetect;
+    
+    if (mode == DetectorMode::FaceDetect) {
+        std::vector<cv::Rect> faceObjects = m_faceDetect.detectFaces(capture);
+
+        // draw rectangle to show faces detected
+        std::vector<cv::Rect>::iterator faceIt;
+        for (faceIt = faceObjects.begin(); faceIt != faceObjects.end(); ++faceIt) {
+            drawRectangle(frame, faceIt->x, faceIt->y, faceIt->width, faceIt->height);
+        }
+    }
+    /*switch (mode) {
+        case DetectorMode::FaceDetect:
+            std::vector<cv::Rect> test = m_faceDetect.detectFaces(capture);
+            break;
+        default:
+            break;
+    }*/
     
     if (!frame.isNull()) {
         m_frameViewer->setPixmap(QPixmap::fromImage(frame));
@@ -57,3 +76,14 @@ QSize ExpressionDetector::sizeHint() const
 {
     return QSize(100, 110);
 }
+
+void ExpressionDetector::drawRectangle(QImage& image, int x, int y, int width, int height)
+{   
+    // draw on image
+    QPainter painter(&image);
+    painter.setPen(Qt::white); // line color
+    painter.setBrush(QBrush(Qt::transparent)); // fill color
+    // draw rectangle
+    painter.drawRect(x, y, width, height);
+}
+

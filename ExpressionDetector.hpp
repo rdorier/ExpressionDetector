@@ -6,11 +6,16 @@
 #include <QtWidgets/QRadioButton>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
+#include <QPainter>
 #include <QTimer>
 #include <opencv2/core/core.hpp>
+#include <vector>
 #include "ui_ExpressionDetector.h"
 #include "FaceDetection.hpp"
 #include "ImageManager.hpp"
+
+
+enum DetectorMode { NoDetect = 0, FaceDetect = 1, ExpressionDetect = 2 };
 
 class ExpressionDetector : public QMainWindow
 {
@@ -22,6 +27,8 @@ public:
 
     void updateFrame();
     QSize sizeHint() const;
+
+    void drawRectangle(QImage& image, int x, int y, int width, int height);
 
 private:
     Ui::ExpressionDetectorClass ui;

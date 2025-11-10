@@ -91,24 +91,7 @@ cv::Mat FaceDetection::getCurrentFrame()
 	// store resulting image to display
 	Mat frame;
 	// capture frame from camera
-	bool result = m_capture.read(frame);
-	// check if resulting image is not empty and end capturing loop if so
-	if (result == false || frame.empty()) {
-		return frame;
-	}
-
-	try {
-		// use cascade classifier to detect face
-		vector<Rect> faceObjects = detectFaces(frame);
-		// draw rectangle to show faces detected
-		vector<Rect>::iterator faceIt;
-		for (faceIt = faceObjects.begin(); faceIt != faceObjects.end(); ++faceIt) {
-			rectangle(frame, *faceIt, m_drawColor);
-		}
-	}
-	catch (Exception const& e) {
-		cerr << "ERREUR : " << e.what() << endl;
-	}
+	m_capture.read(frame);
 
 	return frame;
 }
