@@ -21,11 +21,6 @@ FaceDetection::~FaceDetection()
 
 void FaceDetection::faceDetectionLoop()
 {
-	/*
-	Test function to capture webcam stream, detect faces and draw rectangles around.
-	Images are simply displayed with opencv imshow method.
-	*/
-
 	// store resulting image to display
 	Mat frame;
 
