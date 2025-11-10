@@ -23,7 +23,10 @@ ExpressionDetector::ExpressionDetector(QWidget *parent) : QMainWindow(parent), m
 
 ExpressionDetector::~ExpressionDetector()
 {
+    // delete pointers to avoid memory leak
     delete m_refreshTimer;
+    delete m_frameViewer;
+    delete m_mainWidget;
 }
 
 void ExpressionDetector::updateFrame()
