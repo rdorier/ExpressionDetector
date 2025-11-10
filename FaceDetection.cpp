@@ -109,8 +109,6 @@ cv::Mat FaceDetection::getCurrentFrame()
 	catch (Exception const& e) {
 		cerr << "ERREUR : " << e.what() << endl;
 	}
-	
-	cvtColor(frame, frame, COLOR_BGR2RGB);
 
 	return frame;
 }

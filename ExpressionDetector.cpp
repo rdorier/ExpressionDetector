@@ -8,8 +8,6 @@ ExpressionDetector::ExpressionDetector(QWidget *parent) : QMainWindow(parent), m
 
     m_mainWidget = new QWidget(this);
     QVBoxLayout* layout = new QVBoxLayout(m_mainWidget);
-
-    layout->addWidget(new QLabel("Bonjour depuis le widget central !"));
     layout->addWidget(m_frameViewer);
 
     setCentralWidget(m_mainWidget);
@@ -31,12 +29,11 @@ ExpressionDetector::~ExpressionDetector()
 
 void ExpressionDetector::updateFrame()
 {
-    cv::Mat dest = m_faceDetect.getCurrentFrame();
+    cv::Mat capture = m_faceDetect.getCurrentFrame();
+    QImage frame = ImageManager::convertOpencvImageToQImage(capture);
     
-    QImage image1 = QImage((uchar*)dest.data, dest.cols, dest.rows, dest.step, QImage::Format_RGB888);
-    
-    if (!image1.isNull()) {
-        m_frameViewer->setPixmap(QPixmap::fromImage(image1));
+    if (!frame.isNull()) {
+        m_frameViewer->setPixmap(QPixmap::fromImage(frame));
     }
     
 }
