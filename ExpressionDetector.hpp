@@ -3,7 +3,9 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QWidget>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QRadioButton>
 #include <QVBoxLayout>
+#include <QHBoxLayout>
 #include <QTimer>
 #include <opencv2/core/core.hpp>
 #include "ui_ExpressionDetector.h"

@@ -7,7 +7,21 @@ ExpressionDetector::ExpressionDetector(QWidget *parent) : QMainWindow(parent), m
     m_frameViewer = new QLabel(this);
 
     m_mainWidget = new QWidget(this);
-    QVBoxLayout* layout = new QVBoxLayout(m_mainWidget);
+    QHBoxLayout* layout = new QHBoxLayout(m_mainWidget); // TODO : remove pointer ?
+    
+    QVBoxLayout* detectionOptionsLayout = new QVBoxLayout(m_mainWidget);
+
+    QRadioButton* noDetectionOptionBtn = new QRadioButton("No detection", m_mainWidget);
+    QRadioButton* faceDetectionOptionBtn = new QRadioButton("Face detection", m_mainWidget);
+    faceDetectionOptionBtn->setChecked(true);
+    QRadioButton* expDetectionOptionBtn = new QRadioButton("Expression detection", m_mainWidget);
+    expDetectionOptionBtn->setDisabled(true);
+
+    detectionOptionsLayout->addWidget(noDetectionOptionBtn);
+    detectionOptionsLayout->addWidget(faceDetectionOptionBtn);
+    detectionOptionsLayout->addWidget(expDetectionOptionBtn);
+    
+    layout->addLayout(detectionOptionsLayout);
     layout->addWidget(m_frameViewer);
 
     setCentralWidget(m_mainWidget);

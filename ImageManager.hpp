@@ -12,6 +12,11 @@ class ImageManager
 	/**************************************************/
 
 	public:
+		/*
+		* Convert image from OpenCV to a QImage.
+		* @param imageToConvert : the OpenCV image to convert, a cv::Mat.
+		* @return QImage : the resulting Qt Image corresponding to opencv image, a QImage.
+		*/
 		static QImage convertOpencvImageToQImage(cv::Mat const& imageToConvert);
 
 	
