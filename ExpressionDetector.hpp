@@ -26,16 +26,22 @@ public:
     ~ExpressionDetector();
 
     void updateFrame();
+    void modeChanged(QRadioButton* button, bool checked);
     QSize sizeHint() const;
 
     void drawRectangle(QImage& image, int x, int y, int width, int height);
 
 private:
+    DetectorMode m_mode;
     Ui::ExpressionDetectorClass ui;
     FaceDetection m_faceDetect;
     QTimer* m_refreshTimer;
 
     QWidget* m_mainWidget;
     QLabel* m_frameViewer;
+
+    QRadioButton* m_noDetectionOptionBtn;
+    QRadioButton* m_faceDetectionOptionBtn;
+    QRadioButton* m_expDetectionOptionBtn;
 };
 

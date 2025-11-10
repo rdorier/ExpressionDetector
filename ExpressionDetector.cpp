@@ -1,6 +1,6 @@
 #include "ExpressionDetector.hpp"
 
-ExpressionDetector::ExpressionDetector(QWidget *parent) : QMainWindow(parent), m_faceDetect()
+ExpressionDetector::ExpressionDetector(QWidget *parent) : QMainWindow(parent), m_faceDetect(), m_mode(DetectorMode::FaceDetect)
 {
     setWindowTitle("Expression Detector");
 
@@ -11,15 +11,20 @@ ExpressionDetector::ExpressionDetector(QWidget *parent) : QMainWindow(parent), m
     
     QVBoxLayout* detectionOptionsLayout = new QVBoxLayout(m_mainWidget);
 
-    QRadioButton* noDetectionOptionBtn = new QRadioButton("No detection", m_mainWidget);
-    QRadioButton* faceDetectionOptionBtn = new QRadioButton("Face detection", m_mainWidget);
-    faceDetectionOptionBtn->setChecked(true);
-    QRadioButton* expDetectionOptionBtn = new QRadioButton("Expression detection", m_mainWidget);
-    expDetectionOptionBtn->setDisabled(true);
+    m_noDetectionOptionBtn = new QRadioButton("No detection", m_mainWidget);
+    connect(m_noDetectionOptionBtn, &QRadioButton::toggled, this, [=](bool checked) {this->modeChanged(m_noDetectionOptionBtn, checked); });
 
-    detectionOptionsLayout->addWidget(noDetectionOptionBtn);
-    detectionOptionsLayout->addWidget(faceDetectionOptionBtn);
-    detectionOptionsLayout->addWidget(expDetectionOptionBtn);
+    m_faceDetectionOptionBtn = new QRadioButton("Face detection", m_mainWidget);
+    m_faceDetectionOptionBtn->setChecked(true);
+    connect(m_faceDetectionOptionBtn, &QRadioButton::toggled, this, [=](bool checked) {this->modeChanged(m_faceDetectionOptionBtn, checked); });
+
+    m_expDetectionOptionBtn = new QRadioButton("Expression detection", m_mainWidget);
+    m_expDetectionOptionBtn->setDisabled(true);
+    connect(m_expDetectionOptionBtn, &QRadioButton::toggled, this, [=](bool checked) {this->modeChanged(m_expDetectionOptionBtn, checked); });
+
+    detectionOptionsLayout->addWidget(m_noDetectionOptionBtn);
+    detectionOptionsLayout->addWidget(m_faceDetectionOptionBtn);
+    detectionOptionsLayout->addWidget(m_expDetectionOptionBtn);
     
     layout->addLayout(detectionOptionsLayout);
     layout->addWidget(m_frameViewer);
@@ -45,10 +50,8 @@ void ExpressionDetector::updateFrame()
 {
     cv::Mat capture = m_faceDetect.getCurrentFrame();
     QImage frame = ImageManager::convertOpencvImageToQImage(capture);
-
-    DetectorMode mode = DetectorMode::FaceDetect;
     
-    switch (mode) {
+    switch (m_mode) {
         case DetectorMode::FaceDetect:
         {
             std::vector<cv::Rect> faceObjects = m_faceDetect.detectFaces(capture);
@@ -68,6 +71,21 @@ void ExpressionDetector::updateFrame()
         m_frameViewer->setPixmap(QPixmap::fromImage(frame));
     }
     
+}
+
+void ExpressionDetector::modeChanged(QRadioButton* button, bool checked)
+{
+    if (checked) {
+        if (button == m_noDetectionOptionBtn) {
+            m_mode = DetectorMode::NoDetect;
+        }
+        else if (button == m_faceDetectionOptionBtn) {
+            m_mode = DetectorMode::FaceDetect;
+        }
+        else if (button == m_expDetectionOptionBtn) {
+            m_mode = DetectorMode::ExpressionDetect;
+        }
+    }
 }
 
 
