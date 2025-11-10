@@ -1,5 +1,5 @@
 #include "ExpressionDetector.hpp"
-#include <QtWidgets/QPushButton>
+
 ExpressionDetector::ExpressionDetector(QWidget *parent) : QMainWindow(parent), m_faceDetect()
 {
     setWindowTitle("Expression Detector");

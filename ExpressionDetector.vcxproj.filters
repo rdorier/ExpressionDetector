@@ -43,9 +43,15 @@
     <ClCompile Include="FaceDetection.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ImageManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FaceDetection.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageManager.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

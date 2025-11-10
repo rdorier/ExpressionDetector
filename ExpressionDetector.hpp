@@ -8,6 +8,7 @@
 #include <opencv2/core/core.hpp>
 #include "ui_ExpressionDetector.h"
 #include "FaceDetection.hpp"
+#include "ImageManager.hpp"
 
 class ExpressionDetector : public QMainWindow
 {
