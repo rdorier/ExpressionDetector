@@ -14,7 +14,7 @@
 #include "FaceDetection.hpp"
 #include "ImageManager.hpp"
 
-
+// enum representing the different modes of the expression detector
 enum DetectorMode { NoDetect = 0, FaceDetect = 1, ExpressionDetect = 2 };
 
 class ExpressionDetector : public QMainWindow

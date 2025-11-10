@@ -48,22 +48,21 @@ void ExpressionDetector::updateFrame()
 
     DetectorMode mode = DetectorMode::FaceDetect;
     
-    if (mode == DetectorMode::FaceDetect) {
-        std::vector<cv::Rect> faceObjects = m_faceDetect.detectFaces(capture);
-
-        // draw rectangle to show faces detected
-        std::vector<cv::Rect>::iterator faceIt;
-        for (faceIt = faceObjects.begin(); faceIt != faceObjects.end(); ++faceIt) {
-            drawRectangle(frame, faceIt->x, faceIt->y, faceIt->width, faceIt->height);
-        }
-    }
-    /*switch (mode) {
+    switch (mode) {
         case DetectorMode::FaceDetect:
-            std::vector<cv::Rect> test = m_faceDetect.detectFaces(capture);
+        {
+            std::vector<cv::Rect> faceObjects = m_faceDetect.detectFaces(capture);
+
+            // draw rectangle to show faces detected
+            std::vector<cv::Rect>::iterator faceIt;
+            for (faceIt = faceObjects.begin(); faceIt != faceObjects.end(); ++faceIt) {
+                drawRectangle(frame, faceIt->x, faceIt->y, faceIt->width, faceIt->height);
+            }
             break;
+        }
         default:
             break;
-    }*/
+    }
     
     if (!frame.isNull()) {
         m_frameViewer->setPixmap(QPixmap::fromImage(frame));
