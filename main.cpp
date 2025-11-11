@@ -5,15 +5,10 @@
 
 int main(int argc, char *argv[])
 {
-    /*QApplication app(argc, argv);
-    ExpressionDetector window;
-    window.show();
-
-    return app.exec();*/
-    QApplication a(argc, argv);
+    QApplication app(argc, argv);
     ExpressionDetector w;
 
     w.show();
     
-    return a.exec();
+    return app.exec();
 }
