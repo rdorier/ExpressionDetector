@@ -5,7 +5,7 @@ ExpressionDetector::ExpressionDetector(QWidget *parent) : QMainWindow(parent), m
     setWindowTitle("Expression Detector");
     
     // set style sheet to define style for the application
-    QFile styleFile("style/QTDark.stylesheet");
+    QFile styleFile("style/ExpressionDetector.stylesheet");
     bool stylesheetOpen = styleFile.open(QFile::ReadOnly);
     QString stylesheet = styleFile.readAll();
     setStyleSheet(stylesheet);
