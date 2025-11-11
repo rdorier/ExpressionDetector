@@ -3,6 +3,12 @@
 ExpressionDetector::ExpressionDetector(QWidget *parent) : QMainWindow(parent), m_faceDetect(), m_mode(DetectorMode::FaceDetect)
 {
     setWindowTitle("Expression Detector");
+    
+    // set style sheet to define style for the application
+    QFile styleFile("style/QTDark.stylesheet");
+    bool stylesheetOpen = styleFile.open(QFile::ReadOnly);
+    QString stylesheet = styleFile.readAll();
+    setStyleSheet(stylesheet);
 
     m_frameViewer = new QLabel(this);
 
