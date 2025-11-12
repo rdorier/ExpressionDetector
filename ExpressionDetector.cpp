@@ -3,6 +3,9 @@
 ExpressionDetector::ExpressionDetector(QWidget *parent) : QMainWindow(parent), m_faceDetect(), m_mode(DetectorMode::FaceDetect)
 {
     setWindowTitle("Expression Detector");
+
+    // create alias for UI images path
+    QDir::addSearchPath("images", "./style/images");
     
     // set style sheet to define style for the application
     QFile styleFile("style/ExpressionDetector.stylesheet");

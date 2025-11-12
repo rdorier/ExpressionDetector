@@ -40,7 +40,7 @@ QRadioButton::indicator {
 }
 
 QRadioButton::indicator:checked {
-    image: url(D:/DATA/Romain/Documents/Dev/ExpressionDetector/style/radiobutton-checked-indicator.png);
+    image: url(images:radiobutton-checked-indicator.png);
     border:                 2px solid #0a0a0a;
 }
 
