@@ -6,3 +6,6 @@ This repository contains source code for a facial expression recognition applica
 
 ## Prerequisites
 This project is written with C++ and required Qt 6.10.0 and Opencv 4.12.
+
+## Dataset
+To train model for facial expression recognition, I used the data set from this link : https://www.kaggle.com/datasets/samithsachidanandan/human-face-emotions
