@@ -39,8 +39,11 @@ private:
     FaceDetection m_faceDetect;
     QTimer* m_refreshTimer;
 
+    // members storing interface elements
     QWidget* m_mainWidget;
     QLabel* m_frameViewer;
+    QHBoxLayout* m_mainLayout;
+    QVBoxLayout* m_detectionOptionsLayout;
 
     // radio buttons to set one of the three modes of the application
     QRadioButton* m_noDetectionOptionBtn;
