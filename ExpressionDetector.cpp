@@ -4,6 +4,15 @@ ExpressionDetector::ExpressionDetector(QWidget *parent) : QMainWindow(parent), m
 {
     setWindowTitle("Expression Detector");
 
+    // create alias for UI images path
+    QDir::addSearchPath("images", "./style/images");
+    
+    // set style sheet to define style for the application
+    QFile styleFile("style/ExpressionDetector.stylesheet");
+    bool stylesheetOpen = styleFile.open(QFile::ReadOnly);
+    QString stylesheet = styleFile.readAll();
+    setStyleSheet(stylesheet);
+
     m_frameViewer = new QLabel(this);
 
     m_mainWidget = new QWidget(this);

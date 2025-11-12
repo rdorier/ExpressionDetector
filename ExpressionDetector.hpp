@@ -8,6 +8,8 @@
 #include <QHBoxLayout>
 #include <QPainter>
 #include <QTimer>
+#include <QFile>
+#include <QDir>
 #include <opencv2/core/core.hpp>
 #include <vector>
 #include "ui_ExpressionDetector.h"
