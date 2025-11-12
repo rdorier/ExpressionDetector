@@ -17,7 +17,11 @@
 #include "ImageManager.hpp"
 
 // enum representing the different modes of the expression detector
-enum DetectorMode { NoDetect = 0, FaceDetect = 1, ExpressionDetect = 2 };
+enum DetectorMode {
+    NoDetect = 0, // no detection : the interface only display what camera sees
+    FaceDetect = 1, // face detection : the interface draw a figure around areas where faces are detected
+    ExpressionDetect = 2 // expression detection : the interface draw a figure around areas where faces are detected and display the name of the emotion
+};
 
 class ExpressionDetector : public QMainWindow
 {
@@ -27,8 +31,16 @@ public:
     ExpressionDetector(QWidget *parent = nullptr);
     ~ExpressionDetector();
 
+    // function connected to a timer to refresh frame display by interface in m_frameViewer
     void updateFrame();
+    /*
+     * Change mode of the application (DetectorMode)
+     * This function is connected to radio buttons for user to choose mode with interface.
+     * @param button, a pointer to the QRadioButton that launch the function.
+     * @param checked, a boolean to tell if button is checked or not.
+     */
     void modeChanged(QRadioButton* button, bool checked);
+    // return recommended size for the application
     QSize sizeHint() const;
 
     void drawRectangle(QImage& image, int x, int y, int width, int height);
