@@ -42,18 +42,28 @@ public:
     void modeChanged(QRadioButton* button, bool checked);
     // return recommended size for the application
     QSize sizeHint() const;
-
+    /*
+    * Draw rectangle on a given image.
+    * @param image: the image to draw rectangle on, a QImage.
+    * @param x : the x-coordinates of the upper left corner point of the rectangle to draw, an integer.
+    * @param y : the y-coordinates of the upper left corner point of the rectangle to draw, an integer.
+    * @param width, the width of the rectangle to draw, an integer.
+    * @param height, the height of the rectangle to draw, an integer.
+    */
     void drawRectangle(QImage& image, int x, int y, int width, int height);
 
 private:
+    // mode the application is currently in
     DetectorMode m_mode;
     Ui::ExpressionDetectorClass ui;
+    // face detection engine used to detect faces and expressions
     FaceDetection m_faceDetect;
+    // timer to refresh viewer
     QTimer* m_refreshTimer;
 
     // members storing interface elements
     QWidget* m_mainWidget;
-    QLabel* m_frameViewer;
+    QLabel* m_frameViewer; // viewer displaying camera stream with detection features
     QHBoxLayout* m_mainLayout;
     QVBoxLayout* m_detectionOptionsLayout;
 

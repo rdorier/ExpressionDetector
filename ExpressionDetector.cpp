@@ -13,11 +13,12 @@ ExpressionDetector::ExpressionDetector(QWidget *parent) : QMainWindow(parent), m
     QString stylesheet = styleFile.readAll();
     setStyleSheet(stylesheet);
 
+    // viewer displaying camera stream with detection features
     m_frameViewer = new QLabel(this);
 
     m_mainWidget = new QWidget(this);
+    // store respectively main layout of the application and the one containing radio buttons to change application mode
     m_mainLayout = new QHBoxLayout(m_mainWidget);
-    
     m_detectionOptionsLayout = new QVBoxLayout(m_mainWidget);
 
     // radio button to set mode of the application on "no detection", basically only displaying camera stream
@@ -43,10 +44,9 @@ ExpressionDetector::ExpressionDetector(QWidget *parent) : QMainWindow(parent), m
 
     setCentralWidget(m_mainWidget);
 
+    // timer to refresh viewer
     m_refreshTimer = new QTimer(this);
     connect(m_refreshTimer, &QTimer::timeout, this, &ExpressionDetector::updateFrame);
-
-
     m_refreshTimer->start(20);
 }
 
@@ -65,12 +65,15 @@ ExpressionDetector::~ExpressionDetector()
 
 void ExpressionDetector::updateFrame()
 {
+    // get current frame of the camera
     cv::Mat capture = m_faceDetect.getCurrentFrame();
+    // convert it for qt processes
     QImage frame = ImageManager::convertOpencvImageToQImage(capture);
     
     switch (m_mode) {
         case DetectorMode::FaceDetect:
         {
+            // detect faces in image
             std::vector<cv::Rect> faceObjects = m_faceDetect.detectFaces(capture);
 
             // draw rectangle to show faces detected
@@ -81,6 +84,7 @@ void ExpressionDetector::updateFrame()
             break;
         }
         default:
+            // no process to do, only display image of the camera
             break;
     }
     
