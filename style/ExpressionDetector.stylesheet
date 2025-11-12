@@ -10,7 +10,10 @@ QWidget::item:selected {
 
 QRadioButton {
 	border: none;
-	accent-color: #c01717;
+}
+
+QRadioButton:disabled {
+	color: #b2b2b2;
 }
 
 QRadioButton::unchecked {
@@ -46,4 +49,9 @@ QRadioButton::indicator:checked {
 
 QRadioButton::indicator:unchecked {
     border:                 2px solid #0a0a0a;
+}
+
+QRadioButton::indicator:disabled {
+    image: url(images:radiobutton-disabled-indicator.png);
+    border: 2px solid #0a0a0a;
 }
