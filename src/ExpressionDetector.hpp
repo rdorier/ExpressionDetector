@@ -12,7 +12,6 @@
 #include <QDir>
 #include <opencv2/core/core.hpp>
 #include <vector>
-#include "ui_ExpressionDetector.h"
 #include "FaceDetection.hpp"
 #include "ImageManager.hpp"
 
@@ -55,7 +54,6 @@ public:
 private:
     // mode the application is currently in
     DetectorMode m_mode;
-    Ui::ExpressionDetectorClass ui;
     // face detection engine used to detect faces and expressions
     FaceDetection m_faceDetect;
     // timer to refresh viewer
