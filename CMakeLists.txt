@@ -49,3 +49,13 @@ set_target_properties(ExpressionDetector PROPERTIES
     AUTOUIC ON
     AUTORCC ON
 )
+
+# Define path to windeployqt
+set(WINDEPLOYQT_EXECUTABLE "C:/Qt/6.10.0/msvc2022_64/bin/windeployqt.exe")
+
+# Ajouter une commande post-build
+add_custom_command(TARGET ExpressionDetector POST_BUILD
+    COMMAND "${WINDEPLOYQT_EXECUTABLE}" "$<TARGET_FILE:ExpressionDetector>"
+    COMMENT "Running windeployqt to copy Qt DLLs..."
+)
+
