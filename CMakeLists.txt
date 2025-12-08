@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 4.0)
 
 # configure project
 project(ExpressionDetector)
+# set path to build repository, depending on build type (debug, release, etc)
 set(EXECUTABLE_OUTPUT_PATH bin/${CMAKE_BUILD_TYPE})
 
 # include qt library
