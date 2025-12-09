@@ -76,3 +76,22 @@ add_custom_command(TARGET ExpressionDetector POST_BUILD
             $<TARGET_FILE_DIR:ExpressionDetector>/style
 )
 
+# installation of the solution
+# install binary
+install(TARGETS ExpressionDetector
+    RUNTIME DESTINATION bin
+)
+
+# install resources
+install(
+    DIRECTORY ${CMAKE_SOURCE_DIR}/src/style
+    DESTINATION bin
+)
+
+install(
+    DIRECTORY ${CMAKE_SOURCE_DIR}/src/data/haarcascades
+    DESTINATION bin/data
+)
+
+# deploy qt to package folder
+install(SCRIPT "${CMAKE_SOURCE_DIR}/cmake/DeployQt.cmake")
