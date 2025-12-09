@@ -23,8 +23,8 @@ file (
     source_files
     src/*.cpp
     src/*.hpp
-    style/*
-    data/haarcascades/*
+    src/style/*
+    src/data/haarcascades/*
 )
 
 # configure executable
@@ -44,11 +44,17 @@ target_link_libraries(
 
 target_include_directories(ExpressionDetector PRIVATE ${OpenCV_INCLUDE_DIRS})
 
-# activate automoc to compile code from moc
+# activate automoc to compile code from moc and set startup project for visual studio
 set_target_properties(ExpressionDetector PROPERTIES
     AUTOMOC ON
     AUTOUIC ON
     AUTORCC ON
+    VS_STARTUP_PROJECT ExpressionDetector
+)
+
+# force Visual Studio to launch binary from directory it is located
+set_property(TARGET ExpressionDetector
+    PROPERTY VS_DEBUGGER_WORKING_DIRECTORY "$<TARGET_FILE_DIR:ExpressionDetector>"
 )
 
 # Define path to windeployqt
@@ -58,5 +64,15 @@ set(WINDEPLOYQT_EXECUTABLE "C:/Qt/6.10.0/msvc2022_64/bin/windeployqt.exe")
 add_custom_command(TARGET ExpressionDetector POST_BUILD
     COMMAND "${WINDEPLOYQT_EXECUTABLE}" "$<TARGET_FILE:ExpressionDetector>"
     COMMENT "Running windeployqt to copy Qt DLLs..."
+)
+
+# add post build command to copy resources to binary folder
+add_custom_command(TARGET ExpressionDetector POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+            ${CMAKE_SOURCE_DIR}/src/data/haarcascades
+            $<TARGET_FILE_DIR:ExpressionDetector>/data/haarcascades
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+            ${CMAKE_SOURCE_DIR}/src/style
+            $<TARGET_FILE_DIR:ExpressionDetector>/style
 )
 
