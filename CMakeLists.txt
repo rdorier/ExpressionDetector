@@ -5,11 +5,13 @@ project(ExpressionDetector)
 # set path to build repository, depending on build type (debug, release, etc)
 set(EXECUTABLE_OUTPUT_PATH bin/${CMAKE_BUILD_TYPE})
 
+# specify paths to be searched by find_package commands
+set(CMAKE_PREFIX_PATH ${QT_DIRECTORY}/msvc2022_64/lib/cmake/Qt6 ${OPENCV_DIRECTORY}/build/x64/vc16/lib)
+
 # include qt library
-set(CMAKE_PREFIX_PATH "C:/Qt/6.10.0/msvc2022_64/lib/cmake/Qt6" "D:/opencv/build/x64/vc16/lib")
 find_package(
     Qt6
-    REQUIRED COMPONENTS Widgets  Core Gui
+    REQUIRED COMPONENTS Widgets Core Gui
 )
 link_directories(${Qt_LIBRARY_DIRS})
 include_directories(${Qt_INCLUDE_DIRS})
@@ -58,7 +60,7 @@ set_property(TARGET ExpressionDetector
 )
 
 # Define path to windeployqt
-set(WINDEPLOYQT_EXECUTABLE "C:/Qt/6.10.0/msvc2022_64/bin/windeployqt.exe")
+set(WINDEPLOYQT_EXECUTABLE ${QT_DIRECTORY}/msvc2022_64/bin/windeployqt.exe)
 
 # Ajouter une commande post-build
 add_custom_command(TARGET ExpressionDetector POST_BUILD
