@@ -3,7 +3,7 @@
 using namespace std;
 using namespace cv;
 
-FaceDetection::FaceDetection() : m_drawColor(255, 255, 255), m_faceCascadeDetector("data/haarcascades/haarcascade_frontalface_alt.xml")
+FaceDetection::FaceDetection() : m_drawColor(255, 255, 255), m_faceCascadeDetector("./data/haarcascades/haarcascade_frontalface_alt.xml")
 {
 	// Open the default camera (device ID 0)
 	int deviceID = 0;
@@ -74,8 +74,20 @@ std::vector<cv::Rect> FaceDetection::detectFaces(Mat const& image)
 		Mat grayscaleFrame(image);
 		cvtColor(image, grayscaleFrame, COLOR_BGR2GRAY);
 
-		// use cascade classifier to detect face
-		m_faceCascadeDetector.detectMultiScale(grayscaleFrame, faceObjects);
+		try {
+			// use cascade classifier to detect face
+			m_faceCascadeDetector.detectMultiScale(grayscaleFrame, faceObjects);
+		}
+		catch (const cv::Exception& e) {
+			std::cerr << "OpenCV exception caught: " << e.what() << std::endl;
+		}
+		catch (const std::exception& e) {
+			std::cerr << "Standard exception caught: " << e.what() << std::endl;
+		}
+		catch (...) {
+			std::cerr << "Unknown exception caught!" << std::endl;
+		}
+
 	}
 
 	return faceObjects;
