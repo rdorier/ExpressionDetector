@@ -31,6 +31,13 @@ public:
     ExpressionDetector(QWidget *parent = nullptr);
     ~ExpressionDetector();
 
+    // forbid copy of ExpressionDetector but allow 
+    ExpressionDetector(const ExpressionDetector&) = delete;
+    ExpressionDetector& operator=(const ExpressionDetector&) = delete;
+    // allow moving object using std::move
+    ExpressionDetector(ExpressionDetector&&) = default;
+    ExpressionDetector& operator=(ExpressionDetector&&) = default;
+
     // function connected to a timer to refresh frame display by interface in m_frameViewer
     void updateFrame();
     /*
