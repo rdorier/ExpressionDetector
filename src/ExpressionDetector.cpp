@@ -72,9 +72,8 @@ void ExpressionDetector::updateFrame()
             std::vector<cv::Rect> faceObjects = m_faceDetect.detectFaces(capture);
 
             // draw rectangle to show faces detected
-            std::vector<cv::Rect>::iterator faceIt;
-            for (faceIt = faceObjects.begin(); faceIt != faceObjects.end(); ++faceIt) {
-                drawRectangle(frame, faceIt->x, faceIt->y, faceIt->width, faceIt->height);
+            for (const auto& face : faceObjects) {
+                drawRectangle(frame, face.x, face.y, face.width, face.height);
             }
             break;
         }
@@ -107,7 +106,7 @@ void ExpressionDetector::modeChanged(QRadioButton* button, bool checked)
 
 QSize ExpressionDetector::sizeHint() const
 {
-    return QSize(100, 110);
+    return QSize(640, 480);
 }
 
 void ExpressionDetector::drawRectangle(QImage& image, int x, int y, int width, int height)
