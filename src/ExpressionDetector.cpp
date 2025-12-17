@@ -21,6 +21,10 @@ ExpressionDetector::ExpressionDetector(QWidget *parent) : QMainWindow(parent), m
     m_mainLayout = new QHBoxLayout(m_mainWidget);
     m_detectionOptionsLayout = new QVBoxLayout(m_mainWidget);
 
+#   // group containing the different radio button to select detection modes
+    m_detectionOptionsGrp = new QGroupBox("Detection modes", this);
+    m_detectionOptionsGrp->setMaximumHeight(120);
+
     // radio button to set mode of the application on "no detection", basically only displaying camera stream
     m_noDetectionOptionBtn = new QRadioButton("No detection", m_mainWidget);
     connect(m_noDetectionOptionBtn, &QRadioButton::toggled, this, [=](bool checked) {this->modeChanged(m_noDetectionOptionBtn, checked); });
@@ -35,11 +39,13 @@ ExpressionDetector::ExpressionDetector(QWidget *parent) : QMainWindow(parent), m
     m_expDetectionOptionBtn->setDisabled(true);
     connect(m_expDetectionOptionBtn, &QRadioButton::toggled, this, [=](bool checked) {this->modeChanged(m_expDetectionOptionBtn, checked); });
 
+    // add radio button to layout and set group box to contain this layout
     m_detectionOptionsLayout->addWidget(m_noDetectionOptionBtn);
     m_detectionOptionsLayout->addWidget(m_faceDetectionOptionBtn);
     m_detectionOptionsLayout->addWidget(m_expDetectionOptionBtn);
-    
-    m_mainLayout->addLayout(m_detectionOptionsLayout);
+    m_detectionOptionsGrp->setLayout(m_detectionOptionsLayout);
+
+    m_mainLayout->addWidget(m_detectionOptionsGrp, 0, Qt::AlignTop);
     m_mainLayout->addWidget(m_frameViewer);
 
     setCentralWidget(m_mainWidget);
@@ -59,6 +65,7 @@ ExpressionDetector::~ExpressionDetector()
     delete m_faceDetectionOptionBtn;
     delete m_expDetectionOptionBtn;
     delete m_detectionOptionsLayout;
+    delete m_detectionOptionsGrp;
     delete m_mainLayout;
     delete m_mainWidget;
 }
