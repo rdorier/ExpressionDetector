@@ -45,7 +45,7 @@ ExpressionDetector::ExpressionDetector(QWidget *parent) : QMainWindow(parent), m
     m_detectionOptionsLayout->addWidget(m_expDetectionOptionBtn);
     m_detectionOptionsGrp->setLayout(m_detectionOptionsLayout);
 
-    m_mainLayout->addWidget(m_detectionOptionsGrp);
+    m_mainLayout->addWidget(m_detectionOptionsGrp, 0, Qt::AlignTop);
     m_mainLayout->addWidget(m_frameViewer);
 
     setCentralWidget(m_mainWidget);
