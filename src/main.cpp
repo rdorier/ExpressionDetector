@@ -12,9 +12,9 @@ int main(int argc, char *argv[])
     */
     try {
         QApplication app(argc, argv);
-        ExpressionDetector w;
+        std::unique_ptr<ExpressionDetector> w(new ExpressionDetector);
 
-        w.show();
+        w->show();
 
         return app.exec();
     }
