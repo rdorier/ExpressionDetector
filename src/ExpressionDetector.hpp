@@ -12,6 +12,7 @@
 #include <QDir>
 #include <QGroupBox>
 #include <QDebug>
+#include <QStatusBar>
 #include <opencv2/core/core.hpp>
 #include <vector>
 #include "FaceDetection.hpp"
@@ -23,6 +24,10 @@ enum DetectorMode {
     FaceDetect = 1, // face detection : the interface draw a figure around areas where faces are detected
     ExpressionDetect = 2 // expression detection : the interface draw a figure around areas where faces are detected and display the name of the emotion
 };
+
+// refresh interval to use to redraw frame
+constexpr int REFRESH_INTERVAL = 20;
+static constexpr int DETECTION_OPTIONS_GRP_MAX_HEIGHT = 120;
 
 class ExpressionDetector : public QMainWindow
 {
@@ -74,7 +79,11 @@ private:
     QHBoxLayout* m_mainLayout;
     QVBoxLayout* m_detectionOptionsLayout;
 
-#   // group containing the different radio button to select detection modes
+    // a status bar to display information about the application (number of faces detected)
+    QStatusBar* infoBar;
+    QLabel* infoBarLbl; // label displaying informations in status bar
+
+    // group containing the different radio button to select detection modes
     QGroupBox* m_detectionOptionsGrp;
     // radio buttons to set one of the three modes of the application
     QRadioButton* m_noDetectionOptionBtn;

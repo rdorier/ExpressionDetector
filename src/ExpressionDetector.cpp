@@ -19,6 +19,10 @@ ExpressionDetector::ExpressionDetector(QWidget *parent) : QMainWindow(parent), m
         qWarning() << "Could not open stylesheet file located at " << styleSheetPath << " !";
     }
     
+    // status bar to display information about the application (number of faces detected)
+    infoBar = this->statusBar();
+    infoBarLbl = new QLabel(this);
+    infoBar->addWidget(infoBarLbl);
 
     // viewer displaying camera stream with detection features
     m_frameViewer = new QLabel(this);
@@ -28,9 +32,9 @@ ExpressionDetector::ExpressionDetector(QWidget *parent) : QMainWindow(parent), m
     m_mainLayout = new QHBoxLayout(m_mainWidget);
     m_detectionOptionsLayout = new QVBoxLayout(m_mainWidget);
 
-#   // group containing the different radio button to select detection modes
+    // group containing the different radio button to select detection modes
     m_detectionOptionsGrp = new QGroupBox("Detection modes", this);
-    m_detectionOptionsGrp->setMaximumHeight(120);
+    m_detectionOptionsGrp->setMaximumHeight(DETECTION_OPTIONS_GRP_MAX_HEIGHT);
 
     // radio button to set mode of the application on "no detection", basically only displaying camera stream
     m_noDetectionOptionBtn = new QRadioButton("No detection", m_mainWidget);
@@ -60,7 +64,7 @@ ExpressionDetector::ExpressionDetector(QWidget *parent) : QMainWindow(parent), m
     // timer to refresh viewer
     m_refreshTimer = new QTimer(this);
     connect(m_refreshTimer, &QTimer::timeout, this, &ExpressionDetector::updateFrame);
-    m_refreshTimer->start(20);
+    m_refreshTimer->start(REFRESH_INTERVAL);
 }
 
 ExpressionDetector::~ExpressionDetector() = default;
@@ -82,10 +86,14 @@ void ExpressionDetector::updateFrame()
             for (const auto& face : faceObjects) {
                 drawRectangle(frame, face.x, face.y, face.width, face.height);
             }
+
+            // display number of faces detected in status bar
+            infoBarLbl->setText(QString("Faces detected : %1").arg(faceObjects.size()));
             break;
         }
         default:
-            // no process to do, only display image of the camera
+            // no process to do, only display image of the camera and reset status bar information
+            infoBarLbl->setText("");
             break;
     }
     
