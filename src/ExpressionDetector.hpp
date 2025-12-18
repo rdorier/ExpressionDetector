@@ -11,6 +11,7 @@
 #include <QFile>
 #include <QDir>
 #include <QGroupBox>
+#include <QDebug>
 #include <opencv2/core/core.hpp>
 #include <vector>
 #include "FaceDetection.hpp"

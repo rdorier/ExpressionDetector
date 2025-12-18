@@ -8,10 +8,17 @@ ExpressionDetector::ExpressionDetector(QWidget *parent) : QMainWindow(parent), m
     QDir::addSearchPath("images", "./style/images");
 
     // set style sheet to define style for the application
-    QFile styleFile("./style/ExpressionDetector.stylesheet");
+    QString styleSheetPath("./style/ExpressionDetector.stylesheet");
+    QFile styleFile(styleSheetPath);
     bool stylesheetOpen = styleFile.open(QFile::ReadOnly);
-    QString stylesheet = styleFile.readAll();
-    setStyleSheet(stylesheet);
+    if (stylesheetOpen) {
+        QString stylesheet = styleFile.readAll();
+        setStyleSheet(stylesheet);
+    }
+    else {
+        qWarning() << "Could not open stylesheet file located at " << styleSheetPath << " !";
+    }
+    
 
     // viewer displaying camera stream with detection features
     m_frameViewer = new QLabel(this);
