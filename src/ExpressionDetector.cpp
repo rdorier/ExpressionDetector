@@ -80,15 +80,21 @@ void ExpressionDetector::updateFrame()
         case DetectorMode::FaceDetect:
         {
             // detect faces in image
-            std::vector<cv::Rect> faceObjects = m_faceDetect.detectFaces(capture);
+            try {
+                std::vector<cv::Rect> faceObjects = m_faceDetect.detectFaces(capture);
 
-            // draw rectangle to show faces detected
-            for (const auto& face : faceObjects) {
-                drawRectangle(frame, face.x, face.y, face.width, face.height);
+                // draw rectangle to show faces detected
+                for (const auto& face : faceObjects) {
+                    drawRectangle(frame, face.x, face.y, face.width, face.height);
+                }
+
+                // display number of faces detected in status bar
+                infoBarLbl->setText(QString("Faces detected : %1").arg(faceObjects.size()));
             }
-
-            // display number of faces detected in status bar
-            infoBarLbl->setText(QString("Faces detected : %1").arg(faceObjects.size()));
+            catch (const std::exception& e) {
+                qCritical() << "An error occured during face detection process : " << e.what();
+            }
+            
             break;
         }
         default:
