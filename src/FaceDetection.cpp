@@ -1,3 +1,6 @@
+#include <iostream>
+#include <stdexcept>
+#include <opencv2/imgproc.hpp>
 #include "FaceDetection.hpp"
 
 
