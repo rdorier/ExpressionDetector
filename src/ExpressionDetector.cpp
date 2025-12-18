@@ -19,6 +19,11 @@ ExpressionDetector::ExpressionDetector(QWidget *parent) : QMainWindow(parent), m
         qWarning() << "Could not open stylesheet file located at " << styleSheetPath << " !";
     }
     
+    // status bar to display information about the application (number of faces detected)
+    infoBar = this->statusBar();
+    QLabel* infoBarLbl = new QLabel(this);
+    infoBar->addWidget(infoBarLbl);
+    infoBarLbl->setText("Coucou !");
 
     // viewer displaying camera stream with detection features
     m_frameViewer = new QLabel(this);

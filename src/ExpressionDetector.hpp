@@ -12,6 +12,7 @@
 #include <QDir>
 #include <QGroupBox>
 #include <QDebug>
+#include <QStatusBar>
 #include <opencv2/core/core.hpp>
 #include <vector>
 #include "FaceDetection.hpp"
@@ -73,6 +74,9 @@ private:
     QLabel* m_frameViewer; // viewer displaying camera stream with detection features
     QHBoxLayout* m_mainLayout;
     QVBoxLayout* m_detectionOptionsLayout;
+
+    // a status bar to display information about the application (number of faces detected)
+    QStatusBar* infoBar;
 
 #   // group containing the different radio button to select detection modes
     QGroupBox* m_detectionOptionsGrp;
