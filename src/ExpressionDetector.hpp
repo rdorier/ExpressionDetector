@@ -27,8 +27,11 @@ enum DetectorMode {
 
 // refresh interval to use to redraw frame
 constexpr int REFRESH_INTERVAL = 20;
-static constexpr int DETECTION_OPTIONS_GRP_MAX_HEIGHT = 120;
+constexpr int DETECTION_OPTIONS_GRP_MAX_HEIGHT = 120;
 
+
+// ExpressionDetector: main window of the application.
+// Displays camera stream and handles detection modes. Also display information in the status bar.
 class ExpressionDetector : public QMainWindow
 {
     Q_OBJECT
