@@ -12,12 +12,7 @@ class FaceDetection
 	public:
 		FaceDetection();
 		~FaceDetection();
-
-		/*
-		Test function to capture webcam stream, detect faces and draw rectangles around.
-		Images are simply displayed with opencv imshow method.
-		*/
-		void faceDetectionLoop();
+		
 		/*
 		Use Haar cascade algorithm to detect faces inside an image.
 		@param image, the image to detect faces in it, a cv::Mat.

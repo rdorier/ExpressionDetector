@@ -14,51 +14,8 @@ FaceDetection::FaceDetection() : m_drawColor(255, 255, 255), m_faceCascadeDetect
 
 FaceDetection::~FaceDetection()
 {
-	// clear memory
+	// release VideoCapture
 	m_capture.release();
-	cv::destroyAllWindows();
-}
-
-void FaceDetection::faceDetectionLoop()
-{
-	// store resulting image to display
-	cv::Mat frame;
-
-	// store ASCII code of key pressed by user
-	int keyPressed = -1;
-
-
-	// capture loop
-	while (true) {
-		// capture frame from camera
-		bool result = m_capture.read(frame);
-		// check if resulting image is not empty and end capturing loop if so
-		if (result == false || frame.empty()) {
-			break;
-		}
-
-		try {
-			// use cascade classifier to detect face
-			std::vector<cv::Rect> faceObjects = detectFaces(frame);
-			// draw rectangle to show faces detected
-			std::vector<cv::Rect>::iterator faceIt;
-			for (faceIt = faceObjects.begin(); faceIt != faceObjects.end(); ++faceIt) {
-				rectangle(frame, *faceIt, m_drawColor);
-			}
-		}
-		catch (cv::Exception const& e) {
-			std::cerr << "ERREUR : " << e.what() << std::endl;
-		}
-
-		// display frame
-		imshow("Expression Detection", frame);
-
-		// check if user has pressed escap key to stop capturing loop
-		keyPressed = cv::waitKey(30);
-		if (keyPressed == 27) {
-			break;
-		}
-	}
 }
 
 std::vector<cv::Rect> FaceDetection::detectFaces(cv::Mat const& image)
