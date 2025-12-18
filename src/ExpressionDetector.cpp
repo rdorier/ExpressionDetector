@@ -124,7 +124,7 @@ QSize ExpressionDetector::sizeHint() const
     return QSize(640, 480);
 }
 
-void ExpressionDetector::drawRectangle(QImage& image, int x, int y, int width, int height)
+void ExpressionDetector::drawRectangle(QImage& image, const int x, const int y, const int width, const int height)
 {   
     // draw on image
     QPainter painter(&image);

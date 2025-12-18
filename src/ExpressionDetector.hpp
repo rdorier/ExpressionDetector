@@ -63,7 +63,7 @@ public:
     * @param width, the width of the rectangle to draw, an integer.
     * @param height, the height of the rectangle to draw, an integer.
     */
-    void drawRectangle(QImage& image, int x, int y, int width, int height);
+    void drawRectangle(QImage& image, const int x, const int y, const int width, const int height);
 
 private:
     // mode the application is currently in
