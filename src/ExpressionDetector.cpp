@@ -27,17 +27,17 @@ ExpressionDetector::ExpressionDetector(QWidget *parent) : QMainWindow(parent), m
 
     // radio button to set mode of the application on "no detection", basically only displaying camera stream
     m_noDetectionOptionBtn = new QRadioButton("No detection", m_mainWidget);
-    connect(m_noDetectionOptionBtn, &QRadioButton::toggled, this, [=](bool checked) {this->modeChanged(m_noDetectionOptionBtn, checked); });
+    connect(m_noDetectionOptionBtn, &QRadioButton::toggled, this, [this](bool checked) {modeChanged(m_noDetectionOptionBtn, checked); });
 
     //  radio button to set mode of the application on face detection mode
     m_faceDetectionOptionBtn = new QRadioButton("Face detection", m_mainWidget);
     m_faceDetectionOptionBtn->setChecked(true);
-    connect(m_faceDetectionOptionBtn, &QRadioButton::toggled, this, [=](bool checked) {this->modeChanged(m_faceDetectionOptionBtn, checked); });
+    connect(m_faceDetectionOptionBtn, &QRadioButton::toggled, this, [this](bool checked) {modeChanged(m_faceDetectionOptionBtn, checked); });
 
     //  radio button to set mode of the application on expression detection mode
     m_expDetectionOptionBtn = new QRadioButton("Expression detection", m_mainWidget);
     m_expDetectionOptionBtn->setDisabled(true);
-    connect(m_expDetectionOptionBtn, &QRadioButton::toggled, this, [=](bool checked) {this->modeChanged(m_expDetectionOptionBtn, checked); });
+    connect(m_expDetectionOptionBtn, &QRadioButton::toggled, this, [this](bool checked) {modeChanged(m_expDetectionOptionBtn, checked); });
 
     // add radio button to layout and set group box to contain this layout
     m_detectionOptionsLayout->addWidget(m_noDetectionOptionBtn);
