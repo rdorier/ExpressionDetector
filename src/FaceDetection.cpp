@@ -37,12 +37,15 @@ std::vector<cv::Rect> FaceDetection::detectFaces(cv::Mat const& image)
 		}
 		catch (const cv::Exception& e) {
 			std::cerr << "OpenCV exception caught: " << e.what() << std::endl;
+			throw; // pass error to ExpressionDetector
 		}
 		catch (const std::exception& e) {
 			std::cerr << "Standard exception caught: " << e.what() << std::endl;
+			throw; // pass error to ExpressionDetector
 		}
 		catch (...) {
 			std::cerr << "Unknown exception caught!" << std::endl;
+			throw;
 		}
 
 	}
