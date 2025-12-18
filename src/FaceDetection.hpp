@@ -10,6 +10,10 @@ class FaceDetection
 	public:
 		FaceDetection();
 		~FaceDetection();
+
+		// forbid copy operator as the class manage a camera resource
+		FaceDetection(const FaceDetection&) = delete;
+		FaceDetection operator=(const FaceDetection&) = delete;
 		
 		/*
 		Use Haar cascade algorithm to detect faces inside an image.
