@@ -1,7 +1,7 @@
 #pragma once
 
 #include <opencv2/core/mat.hpp>
-#include <QtWidgets/QWidget>
+#include <QImage>
 
 class ImageManager
 {
