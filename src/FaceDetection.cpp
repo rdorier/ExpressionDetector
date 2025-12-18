@@ -28,7 +28,7 @@ std::vector<cv::Rect> FaceDetection::detectFaces(cv::Mat const& image)
 	}
 	else {
 		// convert frame to grayscale for better result in face detection
-		cv::Mat grayscaleFrame(image);
+		cv::Mat grayscaleFrame;
 		cvtColor(image, grayscaleFrame, cv::COLOR_BGR2GRAY);
 
 		try {
