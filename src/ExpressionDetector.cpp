@@ -21,9 +21,8 @@ ExpressionDetector::ExpressionDetector(QWidget *parent) : QMainWindow(parent), m
     
     // status bar to display information about the application (number of faces detected)
     infoBar = this->statusBar();
-    QLabel* infoBarLbl = new QLabel(this);
+    infoBarLbl = new QLabel(this);
     infoBar->addWidget(infoBarLbl);
-    infoBarLbl->setText("Coucou !");
 
     // viewer displaying camera stream with detection features
     m_frameViewer = new QLabel(this);
@@ -87,10 +86,14 @@ void ExpressionDetector::updateFrame()
             for (const auto& face : faceObjects) {
                 drawRectangle(frame, face.x, face.y, face.width, face.height);
             }
+
+            // display number of faces detected in status bar
+            infoBarLbl->setText(QString::fromStdString("Numbers of faces detected : " + std::to_string(faceObjects.size())));
             break;
         }
         default:
-            // no process to do, only display image of the camera
+            // no process to do, only display image of the camera and reset status bar information
+            infoBarLbl->setText("");
             break;
     }
     

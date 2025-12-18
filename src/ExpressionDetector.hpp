@@ -77,6 +77,7 @@ private:
 
     // a status bar to display information about the application (number of faces detected)
     QStatusBar* infoBar;
+    QLabel* infoBarLbl; // label displaying informations in status bar
 
 #   // group containing the different radio button to select detection modes
     QGroupBox* m_detectionOptionsGrp;
