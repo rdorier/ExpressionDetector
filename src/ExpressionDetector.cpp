@@ -89,7 +89,7 @@ void ExpressionDetector::updateFrame()
                 }
 
                 // display number of faces detected in status bar
-                infoBarLbl->setText(QString("Faces detected : %1").arg(faceObjects.size()));
+                infoBarLbl->setText(QStringLiteral("Faces detected : %1").arg(faceObjects.size()));
             }
             catch (const std::exception& e) {
                 qCritical() << "An error occured during face detection process : " << e.what();
