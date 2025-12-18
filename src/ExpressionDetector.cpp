@@ -88,7 +88,7 @@ void ExpressionDetector::updateFrame()
             }
 
             // display number of faces detected in status bar
-            infoBarLbl->setText(QString::fromStdString("Numbers of faces detected : " + std::to_string(faceObjects.size())));
+            infoBarLbl->setText(QString("Faces detected : %1").arg(faceObjects.size()));
             break;
         }
         default:
