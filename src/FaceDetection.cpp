@@ -1,7 +1,5 @@
 #include "FaceDetection.hpp"
 
-using namespace std;
-using namespace cv;
 
 FaceDetection::FaceDetection() : m_drawColor(255, 255, 255), m_faceCascadeDetector("./data/haarcascades/haarcascade_frontalface_alt.xml")
 {
@@ -22,7 +20,7 @@ FaceDetection::~FaceDetection()
 void FaceDetection::faceDetectionLoop()
 {
 	// store resulting image to display
-	Mat frame;
+	cv::Mat frame;
 
 	// store ASCII code of key pressed by user
 	int keyPressed = -1;
@@ -39,40 +37,40 @@ void FaceDetection::faceDetectionLoop()
 
 		try {
 			// use cascade classifier to detect face
-			vector<Rect> faceObjects = detectFaces(frame);
+			std::vector<cv::Rect> faceObjects = detectFaces(frame);
 			// draw rectangle to show faces detected
-			vector<Rect>::iterator faceIt;
+			std::vector<cv::Rect>::iterator faceIt;
 			for (faceIt = faceObjects.begin(); faceIt != faceObjects.end(); ++faceIt) {
 				rectangle(frame, *faceIt, m_drawColor);
 			}
 		}
-		catch (Exception const& e) {
-			cerr << "ERREUR : " << e.what() << endl;
+		catch (cv::Exception const& e) {
+			std::cerr << "ERREUR : " << e.what() << std::endl;
 		}
 
 		// display frame
 		imshow("Expression Detection", frame);
 
 		// check if user has pressed escap key to stop capturing loop
-		keyPressed = waitKey(30);
+		keyPressed = cv::waitKey(30);
 		if (keyPressed == 27) {
 			break;
 		}
 	}
 }
 
-std::vector<cv::Rect> FaceDetection::detectFaces(Mat const& image)
+std::vector<cv::Rect> FaceDetection::detectFaces(cv::Mat const& image)
 {
 	// vector storing all area where faces are detected
-	vector<Rect> faceObjects;
+	std::vector<cv::Rect> faceObjects;
 	if (image.empty())
 	{
-		throw invalid_argument("Empty image given !");
+		throw std::invalid_argument("Empty image given !");
 	}
 	else {
 		// convert frame to grayscale for better result in face detection
-		Mat grayscaleFrame(image);
-		cvtColor(image, grayscaleFrame, COLOR_BGR2GRAY);
+		cv::Mat grayscaleFrame(image);
+		cvtColor(image, grayscaleFrame, cv::COLOR_BGR2GRAY);
 
 		try {
 			// use cascade classifier to detect face
@@ -96,7 +94,7 @@ std::vector<cv::Rect> FaceDetection::detectFaces(Mat const& image)
 cv::Mat FaceDetection::getCurrentFrame()
 {
 	// store resulting image to display
-	Mat frame;
+	cv::Mat frame;
 	// capture frame from camera
 	m_capture.read(frame);
 
