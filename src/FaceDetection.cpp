@@ -55,7 +55,10 @@ cv::Mat FaceDetection::getCurrentFrame()
 	// store resulting image to display
 	cv::Mat frame;
 	// capture frame from camera
-	m_capture.read(frame);
-
-	return frame;
+	if (m_capture.read(frame)) {
+		return frame;
+	}
+	else {
+		return cv::Mat(); // return empty frame
+	}
 }
