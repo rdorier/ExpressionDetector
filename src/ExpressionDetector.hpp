@@ -84,6 +84,7 @@ private:
 
 #   // group containing the different radio button to select detection modes
     QGroupBox* m_detectionOptionsGrp;
+    const int m_detectionOptionsGrpMaximumHght;
     // radio buttons to set one of the three modes of the application
     QRadioButton* m_noDetectionOptionBtn;
     QRadioButton* m_faceDetectionOptionBtn;

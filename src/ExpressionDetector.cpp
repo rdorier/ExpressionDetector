@@ -1,6 +1,6 @@
 #include "ExpressionDetector.hpp"
 
-ExpressionDetector::ExpressionDetector(QWidget *parent) : QMainWindow(parent), m_faceDetect(), m_mode(DetectorMode::FaceDetect)
+ExpressionDetector::ExpressionDetector(QWidget *parent) : QMainWindow(parent), m_faceDetect(), m_mode(DetectorMode::FaceDetect), m_detectionOptionsGrpMaximumHght(120)
 {
     setWindowTitle("Expression Detector");
 
@@ -34,7 +34,7 @@ ExpressionDetector::ExpressionDetector(QWidget *parent) : QMainWindow(parent), m
 
     // group containing the different radio button to select detection modes
     m_detectionOptionsGrp = new QGroupBox("Detection modes", this);
-    m_detectionOptionsGrp->setMaximumHeight(120);
+    m_detectionOptionsGrp->setMaximumHeight(m_detectionOptionsGrpMaximumHght);
 
     // radio button to set mode of the application on "no detection", basically only displaying camera stream
     m_noDetectionOptionBtn = new QRadioButton("No detection", m_mainWidget);
