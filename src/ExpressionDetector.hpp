@@ -27,6 +27,7 @@ enum DetectorMode {
 
 // refresh interval to use to redraw frame
 constexpr int REFRESH_INTERVAL = 20;
+static constexpr int DETECTION_OPTIONS_GRP_MAX_HEIGHT = 120;
 
 class ExpressionDetector : public QMainWindow
 {
@@ -82,9 +83,8 @@ private:
     QStatusBar* infoBar;
     QLabel* infoBarLbl; // label displaying informations in status bar
 
-#   // group containing the different radio button to select detection modes
+    // group containing the different radio button to select detection modes
     QGroupBox* m_detectionOptionsGrp;
-    const int m_detectionOptionsGrpMaximumHght;
     // radio buttons to set one of the three modes of the application
     QRadioButton* m_noDetectionOptionBtn;
     QRadioButton* m_faceDetectionOptionBtn;
