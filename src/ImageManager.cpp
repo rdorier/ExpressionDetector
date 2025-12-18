@@ -1,4 +1,5 @@
 #include "ImageManager.hpp"
+#include <opencv2/imgproc.hpp>
 
 QImage ImageManager::convertOpencvImageToQImage(cv::Mat const& imageToConvert)
 {
