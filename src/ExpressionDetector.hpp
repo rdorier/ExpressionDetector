@@ -25,6 +25,9 @@ enum DetectorMode {
     ExpressionDetect = 2 // expression detection : the interface draw a figure around areas where faces are detected and display the name of the emotion
 };
 
+// refresh interval to use to redraw frame
+constexpr int REFRESH_INTERVAL = 20;
+
 class ExpressionDetector : public QMainWindow
 {
     Q_OBJECT

@@ -32,7 +32,7 @@ ExpressionDetector::ExpressionDetector(QWidget *parent) : QMainWindow(parent), m
     m_mainLayout = new QHBoxLayout(m_mainWidget);
     m_detectionOptionsLayout = new QVBoxLayout(m_mainWidget);
 
-#   // group containing the different radio button to select detection modes
+    // group containing the different radio button to select detection modes
     m_detectionOptionsGrp = new QGroupBox("Detection modes", this);
     m_detectionOptionsGrp->setMaximumHeight(120);
 
@@ -64,7 +64,7 @@ ExpressionDetector::ExpressionDetector(QWidget *parent) : QMainWindow(parent), m
     // timer to refresh viewer
     m_refreshTimer = new QTimer(this);
     connect(m_refreshTimer, &QTimer::timeout, this, &ExpressionDetector::updateFrame);
-    m_refreshTimer->start(20);
+    m_refreshTimer->start(REFRESH_INTERVAL);
 }
 
 ExpressionDetector::~ExpressionDetector() = default;
