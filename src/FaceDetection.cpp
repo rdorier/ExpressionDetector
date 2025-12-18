@@ -7,7 +7,9 @@ FaceDetection::FaceDetection() : m_drawColor(255, 255, 255), m_faceCascadeDetect
 	int deviceID = 0;
 	int apiID = cv::CAP_ANY; // Auto-detect the backend API
 
-	m_capture.open(deviceID, apiID);
+	if (!m_capture.open(deviceID, apiID)) {
+		throw std::runtime_error("Could not open camera device 0 !");
+	}
 }
 
 FaceDetection::~FaceDetection()
