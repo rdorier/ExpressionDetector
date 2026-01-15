@@ -85,6 +85,7 @@ void ExpressionDetector::updateFrame()
 
                 // draw rectangle to show faces detected
                 for (const auto& face : faceObjects) {
+                    // use a parallel thread to draw rectangle
                     drawRectangle(frame, face.x, face.y, face.width, face.height);
                 }
 
