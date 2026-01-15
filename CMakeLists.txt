@@ -32,8 +32,6 @@ find_package(
     Qt6
     REQUIRED COMPONENTS Widgets Core Gui
 )
-link_directories(${Qt_LIBRARY_DIRS})
-include_directories(${Qt_INCLUDE_DIRS})
 
 # include opencv library
 find_package(OpenCV REQUIRED)
